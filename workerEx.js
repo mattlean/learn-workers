@@ -1,14 +1,3 @@
-/**
- * An intentionally unoptimal fibonacci number calculation.
- */
-const fib = (n) => {
-  if (n < 2) {
-    return n;
-  } else {
-    return fib(n - 1) + fib(n - 2);
-  }
-};
-
 const input = document.querySelector("input");
 const btn = document.querySelector("button");
 const log = document.querySelector("ol");
@@ -26,10 +15,13 @@ btn.addEventListener("click", () => {
   ) {
     result.textContent = `${input.value} = Failure`;
   } else {
-    const startTime = new Date().getTime();
-    const fibNum = fib(inputNum);
-    const duration = new Date().getTime() - startTime;
-
-    result.textContent = `${inputNum} = ${fibNum} - ${duration}ms`;
+    const fibWorker = new window.Worker("/fibWorker.js");
+    fibWorker.postMessage({ inputNum });
+    fibWorker.onerror = (err) => console.error(err);
+    fibWorker.onmessage = (e) => {
+      const { fibNum, duration } = e.data;
+      result.textContent = `${inputNum} = ${fibNum} - ${duration}ms`;
+      fibWorker.terminate();
+    };
   }
 });
