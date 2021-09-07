@@ -2,8 +2,11 @@
   "name": "learn-workers",
   "version": "0.0.1",
   "description": "",
+  "private": true,
   "main": "index.js",
   "scripts": {
+    "build": "webpack",
+    "serve": "webpack serve",
     "start": "nodemon --exec http-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,7 +20,21 @@
   },
   "homepage": "https://github.com/mattlean/learn-workers#readme",
   "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.4",
+    "@babel/preset-react": "^7.14.5",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^4.0.0",
+    "html-webpack-plugin": "^4.5.2",
     "http-server": "^13.0.1",
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^4.8.0",
+    "webpack-dev-server": "^4.1.0",
+    "worker-loader": "^3.0.8"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }

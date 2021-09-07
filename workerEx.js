@@ -15,7 +15,7 @@ btn.addEventListener("click", () => {
   ) {
     result.textContent = `${input.value} = Failure`;
   } else {
-    const fibWorker = new window.Worker("/fibWorker.js");
+    const fibWorker = new window.Worker("/fib.worker.js");
     fibWorker.postMessage({ inputNum });
     fibWorker.onerror = (err) => console.error(err);
     fibWorker.onmessage = (e) => {
